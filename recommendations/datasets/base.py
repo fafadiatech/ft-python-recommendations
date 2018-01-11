@@ -1,4 +1,5 @@
 import os
+import zipfile
 from hashlib import md5
 from abc import ABCMeta, abstractmethod
 
@@ -13,6 +14,10 @@ class Dataset(metaclass=ABCMeta):
     _name = ""
     _download_url = ""
 
+    def _parent_dir(self):
+        current_directory = os.path.dirname(os.path.realpath(__file__))
+        return os.path.join(current_directory, settings.BASE_DOWNLOAD_DIR_NAME)
+
     def file_name(self):
         """
         file_name method is used to get path of where dataset can be accessed from
@@ -21,13 +26,11 @@ class Dataset(metaclass=ABCMeta):
         also ensure that the directory exists before returning the filename
         """
         file_name = md5(self._name.encode("utf-8")).hexdigest()
-        current_directory = os.path.dirname(os.path.realpath(__file__))
-        parent_dir = os.path.join(current_directory, settings.BASE_DOWNLOAD_DIR_NAME)
 
-        if not os.path.exists(parent_dir):
-            os.mkdir(parent_dir)
+        if not os.path.exists(self._parent_dir()):
+            os.mkdir(self._parent_dir())
 
-        return os.path.join(parent_dir, file_name)
+        return os.path.join(self._parent_dir(), file_name)
 
     def download(self):
         """
@@ -45,6 +48,16 @@ class Dataset(metaclass=ABCMeta):
             print("Completed downloading dataset")
         else:
             print("We already have this file cached locally")
+
+    def download_and_unzip(self):
+        """
+        download_and_unzip takes care of both downloading and uncompressing
+        """
+        self.download()
+        compressed_file_name = self.file_name()
+        with zipfile.ZipFile(compressed_file_name, "r") as compressed_file:
+            compressed_file.extractall(self._parent_dir())
+        print("Completed uncompressing")
 
     @abstractmethod
     def download_post_process(self):
