@@ -13,6 +13,7 @@ class Dataset(metaclass=ABCMeta):
     """
     _name = ""
     _download_url = ""
+    dataset = None
 
     def _parent_dir(self):
         current_directory = os.path.dirname(os.path.realpath(__file__))

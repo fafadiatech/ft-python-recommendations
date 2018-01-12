@@ -1,3 +1,6 @@
+import os
+import pandas as pd
+
 from datasets.base import Dataset
 
 
@@ -15,7 +18,15 @@ class NewsDataset(Dataset):
 
         1. uncompress the file
         """
-        pass
+        csv_file = os.path.join(self._parent_dir(), "newsCorpora.csv")
+        print("Processing:", csv_file)
+
+        self.dataset = pd.read_csv(csv_file, sep="\t")
+        self.dataset.columns = ['id', 'title', 'url;', 'publisher',
+                           'category', 'story', 'hostname', 'timestamp']
+        print("Loaded dataset")
+        print(self.dataset.head())
+        print(len(self.dataset))
 
     def total_instances(self):
-        return 0
+        return len(self.dataset)
