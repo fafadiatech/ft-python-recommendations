@@ -15,7 +15,7 @@ The motivation of this project is to build a recommendation engine that is Easy 
 from models.content import CountBased
 from datasets.content import NewsDataset
 
-# Sample only first 2000 records
+# Sample only first 200 records
 dataset = NewsDataset(200)
 recommender = CountBased()
 recommender.train(dataset.get_instances())
