@@ -9,6 +9,10 @@ class TextTransform:
     """
     _stopwords = None
 
+    # Vocabulary consists of token -> token_id
+    # This will help in saving memory
+    vocabulary = {}
+
     def __init__(self):
         """
         do some initialization
@@ -46,14 +50,32 @@ class TextTransform:
 
         return " ".join(results)
 
+    def token_by_id(self, token_id):
+        """
+        token_by_id is used to get token given a token_id
+        """
+        for current_token, current_token_id in self.vocabulary.items():
+            if current_token == token_id:
+                return current_token
+        return ""
+
     def vectorize_by_counts(self, snippet):
         """
         vectorize_by_counts is function given a snippet it will
         return a dictionary of token an count
+
+        Note: it will return dictionary with token_id:count pair
+        if you'd like to look at what token is associated with which token_id
+        look at self.vocabulary {this has token -> token_id} lookup
+
+        You can also use token_by_id for the lookup
         """
         result = defaultdict(int)
 
         for token in self.cleanup(snippet).split():
-            result[token] += 1
-
+            # If we don't have a token in our vocabulary
+            # store it along with ID
+            if token not in self.vocabulary:
+                self.vocabulary[token] = len(self.vocabulary) + 1
+            result[self.vocabulary[token]] += 1
         return result

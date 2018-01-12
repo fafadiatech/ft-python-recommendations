@@ -9,6 +9,19 @@ The motivation of this project is to build a recommendation engine that is Easy 
 1. `models`: Contains code that allow us to define our recommendation algorithm
 1. `transforms`: Contains code that allow us to perform various transformations on dataset. E.g. Stopword removal
 
+## Sample Useage
+
+```python
+from models.content import CountBased
+from datasets.content import NewsDataset
+
+# Sample only first 2000 records
+dataset = NewsDataset(200)
+recommender = CountBased()
+recommender.train(dataset.get_instances())
+print("Total dimensions of features:", len(recommender.transform.vocabulary))
+recommender.predict(182)
+```
 ## Collection of Recommendation Algorithms implemented in Python.
 
 1. [Collaborative Filtering](https://en.wikipedia.org/wiki/Collaborative_filtering)

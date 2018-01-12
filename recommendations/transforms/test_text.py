@@ -11,8 +11,8 @@ def test_strip_stopwords():
 
 def test_vectorize_by_counts():
     transform = TextTransform()
-    exptected = {"test": 2, "yet": 1}
+    exptected = {111: 2, 518: 1}
     actual = transform.vectorize_by_counts("THIS IS A TEST yet test")
     assert len(actual) == len(exptected)
-    assert actual["test"] == exptected["test"]
-    assert "yet" in actual
+    assert actual[111] == exptected[111]
+    assert 518 in actual

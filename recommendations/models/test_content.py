@@ -1,5 +1,20 @@
 from models.content import CountBased
+from datasets.content import NewsDataset
 
 def test_initialization():
     algorithm = CountBased()
     assert algorithm is not None
+
+def test_jaccard_distance():
+    algorithm = CountBased()
+    assert algorithm.compute_distance(['1', '2', '3'], ['2', '3']) == 2/3.0
+
+def test_count_based_recommender():
+    dataset = NewsDataset(200)
+    recommender = CountBased()
+    recommender.train(dataset.get_instances())
+    actual = recommender.predict(182)
+    assert len(actual) == 5
+    doc_id, score = actual[0]
+    assert doc_id == 177
+    assert score == float(1)

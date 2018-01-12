@@ -75,3 +75,9 @@ class Dataset(metaclass=ABCMeta):
         total_instances method is used to get total instances of that given dataset
         """
         pass
+
+    def get_instances(self):
+        """
+        get_instances returns all instances of dataset
+        """
+        return self.dataset
