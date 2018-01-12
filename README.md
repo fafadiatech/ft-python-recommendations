@@ -17,9 +17,13 @@ from datasets.content import NewsDataset
 
 # Sample only first 200 records
 dataset = NewsDataset(200)
+
+# Create a recommendation engine, train it with our data
 recommender = CountBased()
 recommender.train(dataset.get_instances())
 print("Total dimensions of features:", len(recommender.transform.vocabulary))
+
+# Get recommendation for Document with ID 182
 recommender.predict(182)
 ```
 ## Collection of Recommendation Algorithms implemented in Python.
