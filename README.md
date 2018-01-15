@@ -1,6 +1,6 @@
 # recommendations
 
-The motivation of this project is to build a recommendation engine that is Easy to use.
+The motivation of this project is to build a recommendation engine that is Easy to use. This python package has been implemented using **Python 3.6**
 
 ## Key Packages
 
@@ -8,6 +8,12 @@ The motivation of this project is to build a recommendation engine that is Easy 
 1. `dataset`: Contains code that will help download and pre-process datasets
 1. `models`: Contains code that allow us to define our recommendation algorithm
 1. `transforms`: Contains code that allow us to perform various transformations on dataset. E.g. Stopword removal
+
+## Installlation
+
+1. Create virutal environment `virtualenv recommenendations -p /usr/local/bin/python3.6` {Note: You may want to change path to your Python 3.6 binary}
+2. Clone this repository
+3. Install dependencies `pip install -r requirements`
 
 ## Sample Useage
 
