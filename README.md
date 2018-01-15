@@ -33,6 +33,11 @@ print("Total dimensions of features:", len(recommender.transform.vocabulary))
 # Get recommendation for Document with ID 182
 recommender.predict(182)
 ```
+
+## Benchmarking
+
+To run benchmarking tools use `python tools/benchmark_time_required.py` this should generate a file {or append to already file} called `time_required.log`
+
 ## Collection of Recommendation Algorithms implemented in Python.
 
 1. [Collaborative Filtering](https://en.wikipedia.org/wiki/Collaborative_filtering)
