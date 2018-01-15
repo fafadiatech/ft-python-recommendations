@@ -11,9 +11,10 @@ The motivation of this project is to build a recommendation engine that is Easy 
 
 ## Installlation
 
-1. Create virutal environment `virtualenv recommenendations -p /usr/local/bin/python3.6` {Note: You may want to change path to your Python 3.6 binary}
-2. Clone this repository
-3. Install dependencies `pip install -r requirements`
+1. Create virutal environment `virtualenv ~/env/recommenendations -p /usr/local/bin/python3.6` {Note: You may want to change path to your Python 3.6 binary}
+1. Activate virtual env `source ~/env/recommendations/bin/activate`
+1. Clone this repository
+1. Install dependencies `pip install -r requirements`
 
 ## Sample Useage
 
