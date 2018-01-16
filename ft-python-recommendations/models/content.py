@@ -1,6 +1,10 @@
+import os
+import pickle
+import pathlib
 import operator
 import itertools
 
+from config import settings
 from models.base import RecommendationAlgorithm
 from transforms.text import TextTransform
 
@@ -73,6 +77,62 @@ class CountBased(RecommendationAlgorithm):
 
         print("Completed computing similarities")
 
+    def _store_as_pickle(self, item_to_persist, file_path):
+        """
+        _store_as_pickle is reusable function to persist objects to disk
+        """
+        with open(file_path, "wb") as file_to_save:
+            pickle.dump(item_to_persist, file_to_save)
+        print(f"Completed storing to:{file_path}")
+
+    def _load_as_pickle(self, file_path):
+        """
+        _load_as_pickle is reusable function to load persist objects from disk
+        """
+        with open(file_path, "rb") as file_to_load:
+            return pickle.load(file_to_load)
+        return None
+
+    def save_to_disk(self, dir_to_save_path=None):
+        """
+        save_to_disk method is used to save
+
+        1. _vocabulary
+        2. _features
+
+        to disk, so that they can be retrieved in future
+        """
+        if dir_to_save_path is None:
+            dir_to_save_path = os.path.join(settings.PROJECT_ROOT, "persistence", "count_based")
+
+        # Make sure we have the path created, if it already exists
+        # ignore it
+        pathlib.Path(dir_to_save_path).mkdir(parents=True, exist_ok=True)
+
+        vocab_disk_path = os.path.join(dir_to_save_path, "vocabulary.pkl")
+        self._store_as_pickle(self._vocabulary, vocab_disk_path)
+
+        features_disk_path = os.path.join(dir_to_save_path, "features.pkl")
+        self._store_as_pickle(self._features, features_disk_path)
+
+    def load_from_disk(self, dir_to_load_path=None):
+        """
+        load_from_disk method is used to load files saved using 
+        save_to_disk, i.e.
+
+        1. _vocabulary
+        2. _features
+        """
+
+        if dir_to_load_path is None:
+            dir_to_load_path = os.path.join(settings.PROJECT_ROOT, "persistence", "count_based")
+
+        vocab_disk_path = os.path.join(dir_to_load_path, "vocabulary.pkl")
+        self._vocabulary = self._load_as_pickle(vocab_disk_path)
+
+        features_disk_path = os.path.join(dir_to_load_path, "features.pkl")
+        self._features = self._load_as_pickle(features_disk_path)
+
     def predict(self, doc_id):
         """
         predict method will return results sorted as list of tuple (doc_id, score)
@@ -91,3 +151,9 @@ class CountBased(RecommendationAlgorithm):
 
         results.sort(key=operator.itemgetter(1), reverse=True)
         return results
+
+    def vocabulary_count(self):
+        """
+        vocabulary_count is used to return count of vocabulary
+        """
+        return len(self._vocabulary)
