@@ -1,3 +1,8 @@
+"""
+test_content contains few test cases for unit-testing
+content based recommendation algorithm
+"""
+
 from models.content import CountBased
 from datasets.content import NewsDataset
 

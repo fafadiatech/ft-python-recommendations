@@ -1,3 +1,6 @@
+"""
+base contains base classes for recommendation algorithms
+"""
 from abc import ABCMeta, abstractmethod
 
 

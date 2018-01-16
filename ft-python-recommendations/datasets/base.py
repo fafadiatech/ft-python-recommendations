@@ -1,3 +1,9 @@
+"""
+base contains base classes for Dataset which provide standardized interface
+by which we can run different recommendation algorithms on variety of
+different algorithms
+"""
+
 import os
 import zipfile
 from hashlib import md5

@@ -1,3 +1,7 @@
+"""
+text contains classes that implement common textual transformations
+"""
+
 import string
 from collections import defaultdict
 from config import settings

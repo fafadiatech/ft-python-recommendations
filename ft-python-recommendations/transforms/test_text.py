@@ -1,3 +1,7 @@
+"""
+test_text contains test cases for unittesting TextTansform
+classes
+"""
 from transforms.text import TextTransform
 
 

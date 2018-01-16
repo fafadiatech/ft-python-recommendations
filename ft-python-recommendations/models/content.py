@@ -1,3 +1,7 @@
+"""
+content module has class impementation of content based recommendations
+"""
+
 import os
 import pickle
 import pathlib

@@ -1,3 +1,7 @@
+"""
+content has classes to common datasets that have been used for
+content based recommendations
+"""
 import os
 import pandas as pd
 
