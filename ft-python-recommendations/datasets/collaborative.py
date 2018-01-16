@@ -3,6 +3,7 @@ collaborative has classes to common datasets that have been used for
 collaborative filtering
 """
 import os
+import pandas as pd
 from datasets.base import Dataset
 
 class ML100K(Dataset):
@@ -10,9 +11,9 @@ class ML100K(Dataset):
     ML100K is Movie Lens 100K Dataset
     More information: https://grouplens.org/datasets/movielens/100k/
     """
-    _ratings = []
-    _train_ratings = []
-    _test_raings = []
+    _ratings = None
+    _train_ratings = None
+    _test_raings = None
 
     def __init__(self):
         self._name = "Movie Lens 100K"
@@ -23,12 +24,7 @@ class ML100K(Dataset):
         """
         _load_ratings_file is used to load file
         """
-        results = []
-        with open(file_path) as ratings:
-            for row in ratings.readlines():
-                row = row.strip()
-                results.append(row.split("\t"))
-        return results
+        return pd.read_csv(file_path, sep="\t", header=None)
 
     def download_post_process(self):
         """
