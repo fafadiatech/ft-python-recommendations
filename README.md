@@ -32,6 +32,12 @@ print("Total dimensions of features:", len(recommender.transform.vocabulary))
 
 # Get recommendation for Document with ID 182
 recommender.predict(182)
+
+# Disk persistance is also supported
+recommender.save_to_disk()
+
+# Load from disk all pre-computed value
+recommender.load_from_disk()
 ```
 
 ## Benchmarking

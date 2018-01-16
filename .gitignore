@@ -109,3 +109,6 @@ venv.bak/
 
 # download directory generated from our code
 .downloads
+
+# ignore persisted data
+persistence

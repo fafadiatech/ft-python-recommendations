@@ -18,3 +18,14 @@ def test_count_based_recommender():
     doc_id, score = actual[0]
     assert doc_id == 177
     assert score == float(1)
+
+def test_save_and_load_disk():
+    dataset = NewsDataset(200)
+    recommender = CountBased()
+    recommender.train(dataset.get_instances())
+    recommender.save_to_disk()
+
+    expected_vocab_length = recommender.vocabulary_count()
+    recommender.load_from_disk()
+    assert recommender.vocabulary_count() == expected_vocab_length
+    
