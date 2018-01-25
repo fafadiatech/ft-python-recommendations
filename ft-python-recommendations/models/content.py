@@ -44,6 +44,8 @@ class CountBased(RecommendationAlgorithm):
         compute_distance method is used to compute similarity distance
 
         for now we've implemented jaccard, later on we will implement different
+
+        TODO: Add more metrics implementations of compute_distance
         """
 
         # make sure to transform list to set
